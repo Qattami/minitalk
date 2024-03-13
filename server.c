@@ -14,6 +14,7 @@ void handler(int signal)
 		i |= (1 << b);
 	}
 	b++;
+	printf("%c", (char)i); 
 	if(b == 8)
 	{
 		b = 0;
@@ -23,13 +24,15 @@ void handler(int signal)
 }
 int main()
 {
-	printf("pid of server==> %d",getpid());
-	while(1);
-	{
+	int id;
+	id = getpid();
+	printf("pid of server==> %d",id);
 		signal(SIGUSR1, handler);
 		signal(SIGUSR2, handler);
-		sleep(500);
-	}
+		
+		while(1)
+			pause();
+	
 
  return 0;
 }
