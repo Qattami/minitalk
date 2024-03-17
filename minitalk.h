@@ -1,45 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iqattami <iqattami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/16 22:45:50 by iqattami          #+#    #+#             */
-/*   Updated: 2024/03/16 22:45:51 by iqattami         ###   ########.fr       */
+/*   Created: 2024/03/15 13:48:04 by iqattami          #+#    #+#             */
+/*   Updated: 2024/03/17 22:36:21 by iqattami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINITALK_H
+# define MINITALK_H
 
-#include "minitalk.h"
 
-void handler(int signal)
-{
-	static int b;
-	static char msg;
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
-	if (signal == SIGUSR1)
-		msg = (msg << 1) | 1;
-	else if (signal == SIGUSR2)
-		msg = (msg << 1);
+int	ft_atoi(const char *str);
+int	ft_putnbr(long long n);
+int	ft_putchar(char c);
+int	ft_putstr(char *s);
 
-	b++;
-	if (b == 8)
-	{
-		write(1, &msg, 1);
-		b = 0;
-		msg = 0;
-	}
-}
-int main()
-{
-	int id;
-	id = getpid();
-	ft_putnbr(id);
-	write(1, "\n", 1);
-	signal(SIGUSR2, handler);
-	signal(SIGUSR1, handler);
-	while (1)
-		pause();
-	return 0;
-}
+
+#endif

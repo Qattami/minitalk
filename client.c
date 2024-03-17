@@ -4,37 +4,36 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "minitalk.h"
 
 void send(int pid, char *str)
 {
 	int i;
     int error;
-    int len;
     int counter;
 	static char c;
 
 	i = 0;
-    error = -1;
-    len = strlen(str);
-    
-	while(i < len)
+    error = 0;
+	while(str[i])
 	{
-        counter = 0;
+        counter = 7;
         c = str[i];
-        while (counter < 8)
+        while (counter >= 0)//0011 0101  0001 1010
         {
             if((c >> counter) & 1)
-                error = kill(pid, SIGUSR2);
+                error = kill(pid, SIGUSR1);
             else
-              error =   kill(pid, SIGUSR1);
-            usleep(400);
-            counter++;
+                error =   kill(pid, SIGUSR2);
+            usleep(100);
+            counter--;
             if(error == -1)
-                pirntf("error");
+                write(1, "Error",5);
         }
         i++;
 	}
 }
+
 int main(int ac, char **av)
 {
     int pid;
@@ -43,8 +42,16 @@ int main(int ac, char **av)
     if(ac == 3)
     {
         pid = atoi(av[1]);
+        if(pid < 0 || pid > 2147483647)
+        {
+            ft_putstr("PID incorrect");
+            return ;
+        }
         str = av[2];
         send(pid, str);
     }
+    else
+        ft_putstr("invalide input");
 
+    return (0);
 }

@@ -6,7 +6,7 @@
 #    By: iqattami <iqattami@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/12 18:10:57 by iqattami          #+#    #+#              #
-#    Updated: 2024/03/12 18:11:37 by iqattami         ###   ########.fr        #
+#    Updated: 2024/03/15 13:57:28 by iqattami         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)
 
+testing:
+	cc server.c -o server
+	cc client.c -o client 	
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 
