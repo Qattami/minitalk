@@ -6,11 +6,11 @@
 /*   By: iqattami <iqattami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:50:49 by iqattami          #+#    #+#             */
-/*   Updated: 2024/03/17 01:42:00 by iqattami         ###   ########.fr       */
+/*   Updated: 2024/03/20 05:13:28 by iqattami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-  
-  #include "minitalk.h"
+
+#include "minitalk.h"
 
 int	ft_atoi(const char *str)
 {
@@ -33,23 +33,25 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i++] - '0');
 	return (result * sign);
 }
+
 int	ft_putstr(char *s)
 {
 	int	i;
 
 	i = 0;
 	if (!s)
-		{
-			write(1, "(null)", 6);
-			return (6);
-		}
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	while (s[i])
 	{
-		write(1, &s[i],1);
+		write(1, &s[i], 1);
 		i++;
 	}
 	return (i);
 }
+
 int	ft_putnbr(long long n)
 {
 	unsigned int	nb;
@@ -71,6 +73,7 @@ int	ft_putnbr(long long n)
 	}
 	return (nbr);
 }
+
 int	ft_putchar(char c)
 {
 	write(1, &c, 1);
