@@ -13,7 +13,7 @@
 NAME = minitalk.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = server.c client.c
+SRCS = server.c client.c utils.c
 OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)

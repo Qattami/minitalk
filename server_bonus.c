@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-void    handler(int sig, siginfo_t *info, void* str)
+void    ft_sigaction(int signal, siginfo_t *info, void* str)
 {
 	static int b;
 	static char msg;
@@ -38,7 +38,7 @@ int main()
     struct sigaction sa;
 	
 	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = &handler;
+	sa.sa_sigaction = &ft_sigaction;
     
 	if(sigaction(SIGUSR1,&sa, NULL) == -1 || sigaction(SIGUSR2,&sa, NULL) == -1)
 	{
@@ -48,8 +48,8 @@ int main()
 	id = getpid();
 	ft_putnbr(id);
 	write(1, "\n", 1);
-	signal(SIGUSR2, handler);
-	signal(SIGUSR1, handler);
+
+	
 	while (1)
 		pause();
 	return 0;

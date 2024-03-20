@@ -12,23 +12,6 @@
 
 #include "minitalk.h"
 
-static int	ft_putstr(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		{
-			write(1, "(null)", 6);
-			return (6);
-		}
-	while (s[i])
-	{
-		write(1, &s[i],1);
-		i++;
-	}
-	return (i);
-}
 void send(int pid, char *str)
 {
 	int i;
@@ -38,7 +21,7 @@ void send(int pid, char *str)
 
 	i = 0;
     error = 0;
-	while(str[i]+1)
+	while(str[i])
 	{
         counter = 7;
         c = str[i];
@@ -73,16 +56,15 @@ int main(int ac, char **av)
         if(pid < 0 || pid > 2147483647)
         {
             ft_putstr("PID incorrect");
-            return ;
+            exit(1) ;
         }
-        signal(SIGUSR1,done);
         str = av[2];
         send(pid, str);
         signal(SIGUSR1,done);
-
     }
     else
-        ft_putstr("invalide input");
+        (ft_putstr("invalide input"), exit(1));
 
     return (0);
 }
+ 

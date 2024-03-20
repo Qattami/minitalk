@@ -45,7 +45,7 @@ int main(int ac, char **av)
         if(pid < 0 || pid > 2147483647)
         {
             ft_putstr("PID incorrect");
-            return ;
+            exit(1) ;
         }
         str = av[2];
         send(pid, str);
